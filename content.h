@@ -1,11 +1,19 @@
 #pragma once
 class form {
+private:
 	int content[200];
-	int create_i();
-	int create_o();
-	int create_t();
-	int create_l();
-	int create_j();
-	int create_z();
-	int create_s();
+	int type[200];
+public:
+	void create_i();
+	void create_o();
+	void create_t();
+	void create_l();
+	void create_j();
+	void create_z();
+	void create_s();
+	friend void show_screen();
+	friend int is_collision();
+	friend int is_over();
+	form();
+	form(const form& a);
 };
