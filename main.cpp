@@ -9,21 +9,24 @@ form now_screen;
 form inside_screen;
 bool is_hit_down = false;
 bool is_gameover = false;
+bool is_hit = false;
 
 void reply_hit(void* g) {
 	bool is_gameover = (bool*)g;
 	int ch;
 	while (is_gameover) {
-		if (_kbhit()) {
+		if (_kbhit() && !is_hit) {
 			ch = _getch();
-			cout << ch << endl;
-			if (ch == 97 || ch == 75) {    //×ó
+			if (ch == 97 || ch == 75) {
 				now_screen.left();
 			}
-			else if (ch == 100 || ch == 77) {    //ÓÒ
+			else if (ch == 100 || ch == 77) {
 				now_screen.right();
 			}
-			else if (ch == 115 || ch == 80) {    //ÏÂ
+			else if (ch == 119 || ch == 72) {
+				now_screen.up();
+			}
+			else if (ch == 115 || ch == 80) {
 				now_screen.down();
 			}
 		}
@@ -33,18 +36,18 @@ void reply_hit(void* g) {
 
 int main() {
 	_beginthread(reply_hit, 0, &is_gameover);
-	/*²âÊÔÓÃ
-	for (int i = 0; i < 3; i++) {
-		now_screen.create_t();
+	while (!gameover()) {
+		create();
 		show_screen();
-		while (!is_dropover()) {
-			if (!is_hit_down) {
-				now_screen.drop();
-				show_screen();
+		bool is_drop_down = false;
+		while (!is_drop_down) {
+			if (!is_hit) {
+				is_hit = true;
+				is_drop_down = now_screen.drop();
+				is_hit = false;
 				Sleep(800);
 			}
 		}
 	}
-	*/
 	return 0;
 }

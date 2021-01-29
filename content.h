@@ -2,7 +2,8 @@
 class form {
 private:
 	int content[200];
-	int type[200];
+	int type;
+	int axis;
 public:
 	void create_i();
 	void create_o();
@@ -14,21 +15,28 @@ public:
 	void clear();
 	void left();
 	void right();
+	void up();
 	void down();
-	void drop();
+	int drop();
 	friend void show_screen();
-	friend int is_collision();
+	friend void eliminate();
 	friend bool is_dropover();
+	friend bool gameover();
+	void spin();
+	void spin_more();
+	bool is_can_spin();
 	form();
-	form(const form& a);
+	form operator+(const form& a);
 };
 
 extern form now_screen;
 extern form inside_screen;
 extern bool is_hit_down;
 extern bool is_gameover;
+extern bool is_hit;
 
 void show_screen();
-int is_collision();
+void eliminate();
 bool is_dropover();
 int create();
+bool gameover();
