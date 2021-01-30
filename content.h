@@ -41,4 +41,3 @@ void eliminate();
 bool is_dropover();
 int create();
 bool gameover();
-void show_gameover();
