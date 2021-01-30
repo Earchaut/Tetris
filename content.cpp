@@ -220,6 +220,7 @@ void eliminate() {
 		}
 		line -= 10;
 	}
+	show_screen();
 }
 
 bool is_dropover() {
