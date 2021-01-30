@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class form {
 private:
 	int content[200];

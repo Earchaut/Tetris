@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<Windows.h>
 #include<process.h>
 #include<conio.h>
@@ -39,12 +39,12 @@ void reply_hit(void* g) {
 int main() {
 	_beginthread(reply_hit, 0, &is_gameover);
 	system("cls");
-	cout << "               ¶íÂÞË¹·½¿é" << endl;
-	cout << "            ÄúµÄµ±Ç°·ÖÊý£º" << score << endl << endl;
+	cout << "               ä¿„ç½—æ–¯æ–¹å—" << endl;
+	cout << "            æ‚¨çš„å½“å‰åˆ†æ•°ï¼š" << score << endl << endl;
 	for (int i = 0; i < 20; i++) {
 		cout << "          ";
 		for (int k = 0; k < 10; k++) {
-			cout << "¡õ";
+			cout << "â–¡";
 		}
 		cout << endl;
 	}
