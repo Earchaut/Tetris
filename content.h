@@ -26,11 +26,13 @@ public:
 	void spin_more();
 	bool is_can_spin();
 	form();
+	form(const form& a);
 	form operator+(const form& a);
 };
 
 extern form now_screen;
 extern form inside_screen;
+extern form save;
 extern bool is_hit_down;
 extern bool is_gameover;
 extern bool is_hit;
@@ -42,3 +44,4 @@ bool is_dropover();
 int create();
 bool gameover();
 void show_gameover();
+void print(int type, int x, int y);

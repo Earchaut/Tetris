@@ -14,6 +14,14 @@ form::form() {
 	axis = 0;
 }
 
+form::form(const form& a) {
+	for (int i = 0; i < 200; i++) {
+		content[i] = a.content[i];
+	}
+	type = a.type;
+	axis = a.axis;
+}
+
 form form::operator+(const form& a) {
 	form r;
 	for (int i = 0; i < 200; i++) {
@@ -177,10 +185,10 @@ void form::up() {
 void form::down() {
 	is_hit = true;
 	is_hit_down = true;
-	/*while (!is_dropover()) {
-		now_screen.drop();
-	}*/
-	while (!now_screen.drop()) {}
+	bool is_drop_down = false;
+	while (!is_drop_down) {
+		is_drop_down = now_screen.drop();
+	}
 	show_screen();
 	is_hit_down = false;
 	is_hit = false;
@@ -188,20 +196,44 @@ void form::down() {
 
 void show_screen() {
 	int line = 0;
-	system("cls");
-	std::cout << "               俄罗斯方块" << std::endl;
-	std::cout << "            您的当前分数：" << score << std::endl << std::endl;
+	print(score, 13, 1);
 	for (int i = 0; i < 20; i++) {
-		std::cout << "          ";
 		for (int k = 0; k < 10; k++) {
 			if (now_screen.content[10 * line + k] + inside_screen.content[10 * line + k] > 0) {
-				std::cout << "■";
+				if (save.content[10 * line + k] == 0) {
+					print(1, 5 + k, 3 + line);
+				}
 			}
-			else std::cout << "□";
+			else if (save.content[10 * line + k] > 0) {
+				print(2, 5 + k, 3 + line);
+			}
 		}
 		line++;
 		std::cout << std::endl;
 	}
+	save = now_screen + inside_screen;
+}
+
+void print(int type, int x, int y)
+{
+	HANDLE hd;
+	COORD pos;
+	pos.X = 2 * x;
+	pos.Y = y;
+	hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hd, pos);
+	if (type == 1) {
+		std::cout << "■";
+	}
+	else if (type == 2) {
+		std::cout << "□";
+	}
+	else {
+		std::cout << type;
+	}
+	pos.X = 0;
+	pos.Y = 0;
+	SetConsoleCursorPosition(hd, pos);
 }
 
 void eliminate() {
@@ -348,9 +380,15 @@ bool form::is_can_spin() {
 }
 
 void show_gameover() {
-	std::cout << std::endl;
+	HANDLE hd;
+	COORD pos;
+	pos.X = 0;
+	pos.Y = 22;
+	hd = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hd, pos); std::cout << std::endl;
 	std::cout << "              GAME OVER!!!" << std::endl;
-	std::cout << "           你的最终得分是：" << score << std::endl << std::endl;
+	if (score < 1000) std::cout << " ";
+	std::cout << "          你的最终得分是：" << score << std::endl << std::endl;
 	Sleep(1000);
 	system("pause");
 }
