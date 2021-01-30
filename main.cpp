@@ -50,5 +50,6 @@ int main() {
 			}
 		}
 	}
+	show_gameover();
 	return 0;
 }

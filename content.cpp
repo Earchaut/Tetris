@@ -1,6 +1,7 @@
 #include<iostream>
 #include<ctime>
 #include<conio.h>
+#include<Windows.h>
 #include"content.h"
 
 int is_create[7] = { 0 };
@@ -344,4 +345,12 @@ bool form::is_can_spin() {
 		}
 	}
 	return true;
+}
+
+void show_gameover() {
+	std::cout << std::endl;
+	std::cout << "              GAME OVER!!!" << std::endl;
+	std::cout << "           你的最终得分是：" << score << std::endl << std::endl;
+	Sleep(1000);
+	system("pause");
 }
