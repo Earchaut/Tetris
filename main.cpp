@@ -10,6 +10,7 @@ form inside_screen;
 bool is_hit_down = false;
 bool is_gameover = false;
 bool is_hit = false;
+int score = 0;
 
 void reply_hit(void* g) {
 	bool is_gameover = (bool*)g;

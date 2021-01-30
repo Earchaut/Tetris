@@ -34,6 +34,7 @@ extern form inside_screen;
 extern bool is_hit_down;
 extern bool is_gameover;
 extern bool is_hit;
+extern int score;
 
 void show_screen();
 void eliminate();

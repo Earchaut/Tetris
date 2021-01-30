@@ -176,9 +176,10 @@ void form::up() {
 void form::down() {
 	is_hit = true;
 	is_hit_down = true;
-	while (!is_dropover()) {
+	/*while (!is_dropover()) {
 		now_screen.drop();
-	}
+	}*/
+	while (!now_screen.drop()) {}
 	show_screen();
 	is_hit_down = false;
 	is_hit = false;
@@ -187,8 +188,10 @@ void form::down() {
 void show_screen() {
 	int line = 0;
 	system("cls");
-	std::cout << "俄罗斯方块" << std::endl << std::endl;
+	std::cout << "               俄罗斯方块" << std::endl;
+	std::cout << "            您的当前分数：" << score << std::endl << std::endl;
 	for (int i = 0; i < 20; i++) {
+		std::cout << "          ";
 		for (int k = 0; k < 10; k++) {
 			if (now_screen.content[10 * line + k] + inside_screen.content[10 * line + k] > 0) {
 				std::cout << "■";
@@ -203,7 +206,7 @@ void show_screen() {
 void eliminate() {
 	int line = 190;
 	bool is_eliminate;
-	for (int e = 0; e < 19; e++) {
+	for (; line > 10;) {
 		is_eliminate = true;
 		for (int i = line; i < line + 10; i++) {
 			if (inside_screen.content[i] == 0) {
@@ -212,11 +215,13 @@ void eliminate() {
 			}
 		}
 		if (is_eliminate) {
+			score += 100;
 			for (int i = line; i < line + 10; i++) {
 				for (int k = i; k > 10; k -= 10) {
 					inside_screen.content[k] = inside_screen.content[k - 10];
 				}
 			}
+			line += 10;
 		}
 		line -= 10;
 	}
@@ -228,6 +233,7 @@ bool is_dropover() {
 		if (now_screen.content[i] == 1) {
 			if (now_screen.content[i + 10] == 0 && inside_screen.content[i + 10] > 0) {
 				inside_screen = inside_screen + now_screen;
+				score += 5;
 				eliminate();
 				return true;
 			}
@@ -236,6 +242,7 @@ bool is_dropover() {
 	for (int i = 190; i < 200; i++) {
 		if (now_screen.content[i] == 1) {
 			inside_screen = inside_screen + now_screen;
+			score += 5;
 			eliminate();
 			return true;
 		}
