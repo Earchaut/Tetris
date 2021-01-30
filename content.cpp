@@ -317,6 +317,7 @@ void form::spin_more() {
 bool form::is_can_spin() {
 	if (axis % 10 == 0 || axis % 10 == 9) return false;
 	if (axis < 10 || axis >= 190) return false;
+	if (type == 1 && axis < 20) return false;
 	if ((inside_screen.content[axis - 1] > 0 && content[axis + 10] == 1) ||
 		(inside_screen.content[axis + 9] > 0 && content[axis + 11] == 1) ||
 		(inside_screen.content[axis + 10] > 0 && content[axis + 1] == 1) ||
