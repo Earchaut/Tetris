@@ -223,10 +223,10 @@ void print(int type, int x, int y)
 	hd = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(hd, pos);
 	if (type == 1) {
-		std::cout << "Â¡Ã¶";
+		std::cout << "¡ö";
 	}
 	else if (type == 2) {
-		std::cout << "Â¡Ãµ";
+		std::cout << "¡õ";
 	}
 	else {
 		std::cout << type;
@@ -388,7 +388,7 @@ void show_gameover() {
 	SetConsoleCursorPosition(hd, pos); std::cout << std::endl;
 	std::cout << "              GAME OVER!!!" << std::endl;
 	if (score < 1000) std::cout << " ";
-	std::cout << "          ä½ çš„æœ€ç»ˆå¾—åˆ†æ˜¯ï¼š" << score << std::endl << std::endl;
+	std::cout << "          ÄãµÄ×îÖÕµÃ·ÖÊÇ£º" << score << std::endl << std::endl;
 	Sleep(1000);
 	system("pause");
 }
