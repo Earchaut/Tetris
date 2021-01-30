@@ -7,6 +7,7 @@ using namespace std;
 
 form now_screen;
 form inside_screen;
+form save;
 bool is_hit_down = false;
 bool is_gameover = false;
 bool is_hit = false;
@@ -37,9 +38,20 @@ void reply_hit(void* g) {
 
 int main() {
 	_beginthread(reply_hit, 0, &is_gameover);
+	system("cls");
+	cout << "               俄罗斯方块" << endl;
+	cout << "            您的当前分数：" << score << endl << endl;
+	for (int i = 0; i < 20; i++) {
+		cout << "          ";
+		for (int k = 0; k < 10; k++) {
+			cout << "□";
+		}
+		cout << endl;
+	}
 	while (!gameover()) {
 		create();
 		show_screen();
+		Sleep(800);
 		bool is_drop_down = false;
 		while (!is_drop_down) {
 			if (!is_hit) {
